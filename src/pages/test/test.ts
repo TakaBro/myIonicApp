@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
-
-/**
- * Generated class for the TestPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Http } from '@angular/http';
 
 @IonicPage()
 @Component({
@@ -15,23 +9,28 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
   templateUrl: 'test.html',
 })
 export class TestPage {
+  public beer: any = {};
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              public http: Http) {
+            
+                let url = this.navParams.get('api_url');
+                let beer_id = this.navParams.get('beer_id');
+
+                this.http.get(url + '/beers/' + beer_id)
+                /* this.http.get(url + 'abraaoan/iOS-NeemuChallenge/master/challenge.json')     */
+                .map(res => res.json())
+                .subscribe(data  => {
+                this.beer = data;
+                /* console.log(data['result']['products']);
+                this.beer = data['result']['products'][beer_id]; */
+                });
+                
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TestPage');
   }
-
-  showAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'Mensagem',
-      subTitle: 'Você logou!',
-      buttons: ['OK']
-    });
-    alert.present();
-  }
-
 }

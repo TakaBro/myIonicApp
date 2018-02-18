@@ -11,7 +11,8 @@ import 'rxjs/add/operator/map';
 })
 export class HomePage {
 
-  private url:string = 'http://localhost:3030/v1'
+  private url:string = 'http://beer.symfonycasts.com.br/v1'
+  /* private url:string = 'https://raw.githubusercontent.com/' */
   public beers: Array<{}>;
 
   constructor(
@@ -19,14 +20,20 @@ export class HomePage {
       public http: Http
   ) {
     this.http.get(this.url + '/beers')
+    /* this.http.get(this.url + 'abraaoan/iOS-NeemuChallenge/master/challenge.json') */
              .map(res => res.json())
              .subscribe(data  => {
-               console.log(data);
-             });
-  }
+               this.beers = data; 
+               /* console.log(data['result']['products']);
+               this.beers = data['result']['products']; */
+             });             
+  }  
 
-  goToTestPage(){
-      this.navCtrl.push(TestPage);
+  getBeerInfo(id){
+    this.navCtrl.push(TestPage,
+    {
+      'beer_id': id,
+      'api_url': this.url
+    });
   }
-
 }
