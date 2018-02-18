@@ -1,25 +1,24 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>test</ion-title>
+    <ion-title>Produto</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list>
-
-    <ion-item>
-      <ion-label floating>Username</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-  
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <button ion-button full (click)="showAlert()">Logar</button>
+    <ion-card>
+        <!-- <img src="img/nin-live.png"/> -->
+        <!-- <img src= {{beer.image}}/> -->
+        <ion-card-content>
+          <ion-card-title>
+              {{beer.name}}
+            </ion-card-title>
+          <p>
+              Empresa: <strong>{{beer.mark}}</strong> - Preço: <strong>{{beer.price}}</strong>
+              <!-- Descrição: <strong>{{beer.desc}}</strong> - Preço: <strong>{{beer.price}}</strong> -->
+          </p>
+        </ion-card-content>
+      </ion-card>
 </ion-content>
